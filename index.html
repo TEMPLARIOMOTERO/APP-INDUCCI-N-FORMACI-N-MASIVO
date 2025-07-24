@@ -158,6 +158,21 @@
       document.getElementById("whatsappBtn").style.display = "inline-block";
       document.getElementById("whatsappBtn").setAttribute("data-resultado", `📋 Radar del Talento - ${fecha}\n${nombre} (DNI: ${dni})\nFormador: ${formador}\nZonal: ${zonal}\nResultado: ${resultadoText}`);
     }
+// Enviar datos a Google Sheets
+const formData = new FormData();
+formData.append("nombre", nombre);
+formData.append("dni", dni);
+formData.append("zonal", zonal);
+formData.append("formador", formador);
+formData.append("total1", total1);
+formData.append("total2", total2);
+formData.append("resultado", resultadoText);
+formData.append("comentarios", document.getElementById("comentarios").value);
+
+fetch("TU_URL_DEL_WEBAPP", {
+  method: "POST",
+  body: formData
+});
 
     function compartirWhatsApp() {
       const resumen = document.getElementById("whatsappBtn").getAttribute("data-resultado");
